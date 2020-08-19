@@ -1,0 +1,120 @@
+inova-sidebar {
+  grid-column: 1/3;
+}
+
+.content-container {
+  grid-column: 3/11;
+  margin-top: 20px;
+  padding-right: 20px;
+}
+
+.details-container {
+  background: #fff;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+}
+
+.first-line {
+  margin-bottom: 20px;
+  h3 {
+    float:left
+  }
+  span {
+    margin-left: 15px;
+    cursor: pointer;
+  }
+}
+
+.details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+}
+
+.detail {
+  margin: 10px 0px;
+
+  b {
+    font-size: 1.2rem;
+  }
+}
+
+.pagadores-panel {
+  border-radius: 0px !important;
+  margin-bottom: 20px !important;
+}
+
+.mat-expansion-panel-header.mat-expanded {
+  height: 48px !important;
+}
+
+mat-divider {
+  margin: 5px 0px;
+}
+
+.pagador-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+
+  .pagador {
+    margin: 5px 0px;
+    position: relative;
+    b {
+      font-size: 1.2rem;
+    }
+    .actions {
+      position: absolute;
+      top: 0;
+      right: 0;
+
+      button {
+        margin-left: 10px;
+      }
+    }
+  }
+
+  .pagador-email {
+    padding-top: 3px;
+  }
+}
+
+.pagador-form {
+  padding-top: 20px;
+  grid-column-gap: 10px;
+}
+
+.novo-pagador {
+  margin-top: 10px;
+  float: right;
+}
+
+.cancel-alterar-pagador {
+  margin-top: 10px;
+  float: right;
+  margin-left:10px;
+}
+
+@media (max-width: 900px) {
+  inova-sidebar {
+    display: none;
+  }
+
+  .content-container {
+    grid-column: 1/11;
+  }
+
+  section {
+    width: 100%;
+    padding-left: 20px;
+  }
+
+  .pagador-form {
+    display: block;
+
+    mat-form-field {
+      padding: 0px 15px;
+      width: 100%;
+    }
+  }
+}

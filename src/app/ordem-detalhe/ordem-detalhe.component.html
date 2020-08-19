@@ -1,0 +1,150 @@
+<main>
+  <inova-navbar></inova-navbar>
+  <section>
+    <inova-sidebar></inova-sidebar>
+
+    <div class="content-container">
+      <div class="first-line">
+        <h3>Ordem de Pagamento - {{ ordem.numero_nota_ato }}</h3>
+        <span (click)="openEdit()" class="material-icons">
+          edit
+        </span>
+      </div>
+      <div class="details-container mat-elevation-z8">
+        <div class="details">
+          <div class="detail">
+            <b>Número da Nota do Ato</b>
+            <p>{{ ordem.numero_nota_ato }}</p>
+          </div>
+          <div class="detail">
+            <b>Data de Lavratura do Ato</b>
+            <p>{{ ordem.data_lavratura_display }}</p>
+          </div>
+          <div class="detail">
+            <b>Livro do Ato</b>
+            <p>{{ ordem.livro_ato }}</p>
+          </div>
+          <div class="detail">
+            <b>Folha do Ato</b>
+            <p>{{ ordem.folha_ato }}</p>
+          </div>
+          <div class="detail detail-valor">
+            <b>Valor Total (R$)</b>
+            <p>{{ ordem.valor_total }}</p>
+          </div>
+        </div>
+      </div>
+
+      <mat-accordion class="pagadores-container">
+        <mat-expansion-panel class="pagadores-panel mat-elevation-z8" (opened)="panelOpenState = true"
+          (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Pagadores - Total Declarado {{total_declarado}} ({{total_offset}})
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <mat-divider></mat-divider>
+          <span *ngFor="let ordempagador of pagadores">
+            <div class="pagador-container">
+              <div class="pagador">
+                <b>CPF</b>
+                <p>{{ ordempagador.pagador.cpf }}</p>
+              </div>
+              <div class="pagador">
+                <b>Nome Completo</b>
+                <p>{{ ordempagador.pagador.nome }}</p>
+                <div class="actions">
+                  <button mat-mini-fab color="primary" (click)="alterarPagador(ordempagador)"
+                    aria-label="Example icon button with a delete icon">
+                    <mat-icon>edit</mat-icon>
+                  </button>
+                  <button mat-mini-fab color="primary" (click)="openDialog(ordempagador.pagador)"
+                    aria-label="Example icon button with a delete icon">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
+              </div>
+              <div class="pagador">
+                <b>Email</b>
+                <p>{{ ordempagador.pagador.email }}</p>
+              </div>
+              <div class="pagador">
+                <b>Telefone</b>
+                <p>{{ ordempagador.pagador.telefone }}</p>
+              </div>
+              <div class="pagador">
+                <b>Valor (R$)</b>
+                <p>{{ ordempagador.valor }}</p>
+              </div>
+              <div class="pagador pagador-email">
+                <button type="button" mat-stroked-button color="primary">
+                  Enviar por Email
+                  <span class="material-icons">
+                    send
+                  </span>
+                </button>
+              </div>
+            </div>
+
+            <mat-divider></mat-divider>
+          </span>
+          <form (submit)="associate()" [formGroup]="pagadorForm">
+            <div *ngIf="novoPagador == true" class="pagador-container pagador-form">
+
+              <mat-form-field appearance="fill" v>
+                <mat-label>CPF</mat-label>
+                <input #cpfIpt matInput placeholder="Ex. 111.111.111-11" [textMask]="{mask: cpf_mask}"
+                  formControlName="cpf" (keyup)="cpfChange(cpfIpt.value)" value="" />
+              </mat-form-field>
+
+              <mat-form-field appearance="fill">
+                <mat-label>Nome Completo</mat-label>
+                <input matInput placeholder="Ex. Fulano da Silva" formControlName="nome" value="" />
+              </mat-form-field>
+
+              <mat-form-field appearance="fill">
+                <mat-label>Email</mat-label>
+                <input type="email" matInput placeholder="Ex. teste@teste.com" formControlName="email" value="" />
+              </mat-form-field>
+
+              <mat-form-field appearance="fill">
+                <mat-label>Telefone</mat-label>
+                <input matInput placeholder="Ex. (11) 1234-5236" [textMask]="{mask: phone_mask}"
+                  formControlName="telefone" value="" />
+              </mat-form-field>
+
+              <mat-form-field appearance="fill">
+                <mat-label>Valor (R$)</mat-label>
+                <input matInput formControlName="valor" [textMask]="{mask: money_mask}" placeholder="Ex. 1200,00"
+                  value="" />
+              </mat-form-field>
+            </div>
+
+            <button type="submit" *ngIf="novoPagador && isEditingPagador" class="cancel-alterar-pagador"
+              mat-raised-button color="primary">
+              Alterar
+            </button>
+
+            <button type="button" (click)="cancelAlterar()" *ngIf="novoPagador && isEditingPagador" class="novo-pagador"
+              mat-raised-button>
+              Cancelar
+            </button>
+
+            <button type="submit" *ngIf="novoPagador && !isEditingPagador" class="novo-pagador" mat-raised-button
+              color="primary">
+              Cadastrar
+            </button>
+          </form>
+
+          <button *ngIf="!novoPagador" (click)="novoPagadorBtn()" type="button" class="novo-pagador" mat-raised-button
+            color="primary">
+            Novo Pagador
+          </button>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </section>
+</main>
+
+<inova-loading *ngIf="loading"></inova-loading>

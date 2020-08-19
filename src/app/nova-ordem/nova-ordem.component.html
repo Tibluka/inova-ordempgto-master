@@ -1,0 +1,53 @@
+<form [formGroup]="ordemForm" (ngSubmit)="cadastrarOrdem()">
+  <div class="inova-dialog">
+    <h2 *ngIf="!isEditing" class="inova-dialog-title" mat-dialog-title>Nova Ordem de Pagamento</h2>
+    <h2 *ngIf="isEditing" class="inova-dialog-title" mat-dialog-title>Alterar Ordem de Pagamento</h2>
+    <div class="inova-dialog-content" mat-dialog-content>
+      <mat-form-field appearance="fill">
+        <mat-label>Número da Nota do Ato</mat-label>
+        <input matInput placeholder="Ex. 12345" value="" formControlName="numero_nota_ato" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Data de Lavratura do Ato</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="data_lavratura_ato" />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Livro do Ato</mat-label>
+        <input matInput placeholder="Ex. 123" value="" formControlName="livro_ato" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Folha do Ato</mat-label>
+        <input matInput placeholder="Ex. 123" value="" formControlName="folha_ato" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Valor Total (R$)</mat-label>
+        <input matInput placeholder="Ex. 1200,00" [textMask]="{mask: money_mask}" value=""
+          formControlName="valor_total" />
+      </mat-form-field>
+    </div>
+    <!-- <mat-toolbar *ngIf="success_warn" class="inova-dialog-warn" color="primary">
+      <h4>Ordem de Pagamento cadastrada com sucesso</h4>
+    </mat-toolbar> -->
+    <div class="inova-dialog-actions" mat-dialog-actions>
+      <button type="button" mat-raised-button (click)="onNoClick()">
+        Cancelar
+      </button>
+      <button *ngIf="!success_warn && !isEditing" type="submit" mat-raised-button color="primary">
+        Cadastrar
+      </button>
+      <button *ngIf="!success_warn && isEditing" type="submit" mat-raised-button color="primary">
+        Atualizar
+      </button>
+      <button *ngIf="success_warn" type="button" (click)="novaOrdem()" mat-raised-button color="primary">
+        Nova Ordem
+      </button>
+    </div>
+  </div>
+</form>
+<inova-loading *ngIf="loading"></inova-loading>

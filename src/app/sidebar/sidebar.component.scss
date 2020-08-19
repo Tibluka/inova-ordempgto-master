@@ -1,0 +1,24 @@
+.sidebar-container {
+  //   background: #fff;
+  padding: 20px;
+  border-right: 1px solid #cacaca;
+  height: 100%;
+  min-height: 91vh;
+}
+
+a {
+  color: #2b2b2b;
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+}
+
+li {
+  height: 4rem;
+  align-items: center;
+  display: flex;
+
+  span {
+    margin-right: 5px;
+  }
+}

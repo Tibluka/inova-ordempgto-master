@@ -1,0 +1,26 @@
+
+.inova-dialog {
+    display: grid;
+    grid-template-rows: repeat(4, 1fr);
+    height: 100%;
+    align-items: flex-start;
+  
+    .inova-dialog-title {
+      grid-row: 1/2;
+    }
+  
+    .inova-dialog-content {
+      grid-row: 2/4;
+      text-align: center;
+      .content {
+        margin: 20px 0px;
+        font-weight: 600;
+      }
+    }
+    
+    .inova-dialog-actions {
+      grid-row: 4/5;
+      display: flex;
+      justify-content: space-evenly;
+    }
+  }

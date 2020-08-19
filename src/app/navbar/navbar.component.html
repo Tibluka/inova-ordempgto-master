@@ -1,0 +1,48 @@
+<div class="nav-container">
+  <nav>
+    <button class="hamburguer" mat-button [matMenuTriggerFor]="menu">
+      <span class="material-icons">
+        menu
+      </span>
+    </button>
+
+    <a class="nav-title-link" routerLink="/ordens-pagamento">
+      <h2 class="nav-title">Inova - Cartórios</h2></a>
+    <ul class="nav-actions">
+      <li class="nav-user">
+        <span>
+          <ul>
+            <li>
+              <p>{{ name }}</p>
+            </li>
+            <li><a routerLink="/login">Sair</a></li>
+          </ul>
+        </span>
+      </li>
+      <li class="nav-avatar">
+        <span class="material-icons">
+          account_circle
+        </span>
+      </li>
+    </ul>
+  </nav>
+
+  <mat-menu class="menu-hamb" xPosition="after" #menu="matMenu">
+    <div class="user-mobile">
+      <span class="material-icons">
+        account_circle
+      </span>
+
+      <p>{{ name }}</p>
+
+      <a routerLink="/login">Sair</a>
+    </div>
+
+    <a routerLink="/ordens-pagamento">
+      <button class="menu-btn" mat-menu-item>
+        <span class="material-icons">library_books</span>
+        Ordens de Pagamento
+      </button>
+    </a>
+  </mat-menu>
+</div>

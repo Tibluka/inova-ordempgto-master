@@ -1,0 +1,114 @@
+<main>
+  <inova-navbar></inova-navbar>
+  <section>
+    <inova-sidebar></inova-sidebar>
+
+    <div class="content-container">
+      <div class="first-line">
+        <h3 class="section-title">Ordens de Pagamento</h3>
+
+        <button (click)="openDialog()" class="btn-nova-ordem" mat-raised-button color="primary">
+          <span class="material-icons">library_add</span>
+          Nova Ordem de Pagamento
+        </button>
+      </div>
+      <div class="filters-container mat-elevation-z8">
+        <div class="filters">
+          <h5 class="title-pesquisar">Pesquisar</h5>
+
+          <form class="search-form" [formGroup]="searchForm" (submit)="clickPesquisar()">
+            <mat-form-field class="tpPesquisa" appearance="fill">
+              <mat-label>Tipo de Pesquisa</mat-label>
+              <select [(value)]="tipoPesquisa" matNativeControl required (change)="tipoPesquisaChange($event)">
+                <option value="periodo">Período</option>
+                <option value="numero_nota_ato">Número da Nota do Ato</option>
+                <option value="pagador">Pagador</option>
+              </select>
+            </mat-form-field>
+
+            <div class="fields">
+              <mat-form-field *ngIf="tipoPesquisa === 'periodo'" appearance="fill" class="ipt-date-range">
+                <mat-label>Escolha um período para pesquisa</mat-label>
+                <mat-date-range-input [rangePicker]="picker">
+                  <input matStartDate formControlName="periodoDe" placeholder="Data Inicial" />
+                  <input matEndDate formControlName="periodoAte" placeholder="Data Final" />
+                </mat-date-range-input>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-date-range-picker #picker></mat-date-range-picker>
+              </mat-form-field>
+
+              <mat-form-field *ngIf="tipoPesquisa === 'numero_nota_ato'" appearance="fill" class="ipt-numero_nota_ato">
+                <mat-label>Número da Nota do Ato</mat-label>
+                <input matInput placeholder="Ex. 123456" formControlName="numero_nota_ato" value="" />
+              </mat-form-field>
+
+              <mat-form-field *ngIf="tipoPesquisa === 'pagador'" appearance="fill" class="ipt-pagador">
+                <mat-label>CPF do Pagador</mat-label>
+                <input matInput placeholder="Ex. 111.111.111-11" [textMask]="{mask: cpf_mask}" formControlName="pagador"
+                  value="" />
+              </mat-form-field>
+            </div>
+            <button type="submit" class="btn-sbmt" mat-raised-button color="primary">
+              Pesquisar
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <div class="table-container mat-elevation-z8">
+        <table mat-table matSort [dataSource]="dataSource">
+          <ng-container matColumnDef="numero_nota_ato">
+            <th mat-header-cell *matHeaderCellDef>Número da Nota do Ato</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.numero_nota_ato }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="data_lavratura">
+            <th mat-header-cell matSort *matHeaderCellDef>
+              Data de Lavratura do Ato
+            </th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.data_lavratura }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="livro_ato">
+            <th mat-header-cell *matHeaderCellDef>Livro do Ato</th>
+            <td mat-cell *matCellDef="let element">{{ element.livro_ato }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="folha_ato">
+            <th mat-header-cell *matHeaderCellDef>Folha do Ato</th>
+            <td mat-cell *matCellDef="let element">{{ element.folha_ato }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="valor_total">
+            <th mat-header-cell matSort *matHeaderCellDef>Valor Total (R$)</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.valor_total }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let element">
+              <a class="goToLink" routerLink="/ordem-detalhe/{{ element.codigo }}">
+                <span class="material-icons">
+                  call_made
+                </span>
+              </a>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+
+        <mat-paginator #paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+      </div>
+    </div>
+  </section>
+</main>
+
+<inova-loading *ngIf="loading"></inova-loading>

@@ -1,0 +1,11 @@
+<div class="inova-dialog">
+    <h2 class="inova-dialog-title" mat-dialog-title>Remover Pagador</h2>
+    <div class="inova-dialog-content" mat-dialog-content>
+        <p>Confirma exclusão do pagador abaixo?</p>
+        <p class="content">{{data.cpf}} - {{data.nome}}</p>
+    </div>
+    <div class="inova-dialog-actions" mat-dialog-actions>
+        <button mat-raised-button (click)="onNoClick()">Cancelar</button>
+        <button mat-raised-button color="primary" (click)="onClick(data.cpf)">Confirmar</button>
+    </div>
+</div>
