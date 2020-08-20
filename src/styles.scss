@@ -135,9 +135,7 @@ ul {
 section {
   width: 100%;
   // margin: auto;
-  display: grid;
-  grid-template-columns: repeat(10, 1fr);
-  grid-column-gap: 20px;
+  display: flex;
 }
 
 a {

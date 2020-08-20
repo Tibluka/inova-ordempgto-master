@@ -9,7 +9,7 @@ export class AuthGuardService implements CanActivate {
   constructor(public router: Router) { }
   
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    var isvalid = false;
+    var isvalid = true;
     if(localStorage.getItem('logged-user')) {
       let parsed = JSON.parse(localStorage.getItem('logged-user'))
       let timestamp = parsed.timestamp

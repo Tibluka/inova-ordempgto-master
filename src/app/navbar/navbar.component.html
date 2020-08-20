@@ -1,13 +1,9 @@
 <div class="nav-container">
   <nav>
-    <button class="hamburguer" mat-button [matMenuTriggerFor]="menu">
-      <span class="material-icons">
-        menu
-      </span>
-    </button>
-
-    <a class="nav-title-link" routerLink="/ordens-pagamento">
-      <h2 class="nav-title">Inova - Cartórios</h2></a>
+    <a class="nav-title-link" routerLink="/ordens-pagamento" style="display: flex; justify-content: space-between; width: 50%;">
+      <h2 class="nav-title" (click)="openNav()">&#9776;</h2>
+      <a style="margin-left: 10px;">Inova Cartórios</a>
+    </a>
     <ul class="nav-actions">
       <li class="nav-user">
         <span>

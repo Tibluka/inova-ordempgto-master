@@ -1,17 +1,19 @@
-inova-sidebar {
-  grid-column: 1/3;
+main {
+  section {
+    display: flex;
+  }
 }
 
 .content-container {
-  grid-column: 3/11;
   margin-top: 20px;
-  padding-right: 20px;
+  padding: 0 20px;
+  width: 100%;
 }
 
 .filters-container {
   background: #fff;
   padding: 20px;
-  position: relative;
+  border-radius: 5px;
 }
 
 .table-container {

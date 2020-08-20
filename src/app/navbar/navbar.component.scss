@@ -20,11 +20,15 @@ nav {
   width: 100%;
   padding: 8px 20px;
   margin: auto;
-  min-height: 8vh;
+  max-height: 6vh;
   justify-content: space-between;
   align-items: center;
   display: flex;
   flex: 0;
+  background-color: rgb(253, 159, 122);
+  h2{
+    font-size: 11pt;
+  }
 
   .nav-title {
     flex: 3;
