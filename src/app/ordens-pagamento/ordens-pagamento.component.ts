@@ -6,23 +6,9 @@ import { toBRDate, getPeriodoDefault } from '../utils/DateUtils';
 import { MatDialog } from '@angular/material/dialog';
 import { NovaOrdemComponent } from '../nova-ordem/nova-ordem.component';
 import { OrdemService } from '../services/ordem.service';
-import {
-  FormBuilder,
-  FormGroup,
-  Validators,
-  FormControl,
-  AbstractControl,
-} from '@angular/forms';
-
-import {
-  MomentDateAdapter,
-  MAT_MOMENT_DATE_ADAPTER_OPTIONS,
-} from '@angular/material-moment-adapter';
-import {
-  DateAdapter,
-  MAT_DATE_FORMATS,
-  MAT_DATE_LOCALE,
-} from '@angular/material/core';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 
 import * as _moment from 'moment';
 // tslint:disable-next-line:no-duplicate-imports
@@ -64,10 +50,10 @@ export const MY_FORMATS = {
   ],
 })
 export class OrdensPagamentoComponent implements OnInit {
-  ordens: OrdemInterface[];
-  dataSource;
-  loading: boolean = false;
-  searchForm: FormGroup = null;
+  ordens: OrdemInterface[]
+  dataSource
+  loading: boolean = false
+  searchForm: FormGroup = null
 
   cpf_mask = [/[0-9]/, /[0-9]/, /[0-9]/, '.', /[0-9]/, /[0-9]/, /[0-9]/, '.', /[0-9]/, /[0-9]/, /[0-9]/, '-', /[0-9]/, /[0-9]/]
 
@@ -128,14 +114,16 @@ export class OrdensPagamentoComponent implements OnInit {
 
   ngOnInit() {
     this.searchForm = this.formBuilder.group({
-      periodoDe: [this.periodoDefault['periodoDe'], Validators.required],
-      periodoAte: [this.periodoDefault['periodoAte'], Validators.required],
-      //numero_nota_ato: ['', Validators.required],
-      //pagador: ['', Validators.required]
+      periodoDe: [this.periodoDefault['periodoDe']],
+      periodoAte: [this.periodoDefault['periodoAte']],
+      numero_nota_ato: [''],
+      pagador: ['']
     });
 
     this.loadOrdens();
   }
+
+
 
   loadOrdens() {
     this.loading = true;
@@ -165,6 +153,7 @@ export class OrdensPagamentoComponent implements OnInit {
   }
 
   clickPesquisar() {
+    debugger
     if (this.searchForm.valid) this.loadOrdens();
   }
 
@@ -178,9 +167,7 @@ export class OrdensPagamentoComponent implements OnInit {
       this.pesquisa.periodoAte = this.searchForm.get('periodoAte').value;
     } catch (e) { }
     try {
-      this.pesquisa.numero_nota_ato = this.searchForm.get(
-        'numero_nota_ato'
-      ).value;
+      this.pesquisa.numero_nota_ato = this.searchForm.get('numero_nota_ato').value;
     } catch (e) { }
     try {
       this.pesquisa.pagador = this.searchForm.get('pagador').value;
@@ -190,35 +177,21 @@ export class OrdensPagamentoComponent implements OnInit {
       case 'periodo':
         this.searchForm.removeControl('numero_nota_ato');
         this.searchForm.removeControl('pagador');
-        this.searchForm.addControl(
-          'periodoDe',
-          new FormControl(this.pesquisa.periodoDe, Validators.required)
-        );
-        this.searchForm.addControl(
-          'periodoAte',
-          new FormControl(this.pesquisa.periodoAte, Validators.required)
-        );
+        this.searchForm.addControl('periodoDe', new FormControl(this.pesquisa.periodoDe, Validators.required));
+        this.searchForm.addControl('periodoAte', new FormControl(this.pesquisa.periodoAte, Validators.required));
         break;
-
       case 'numero_nota_ato':
         this.searchForm.removeControl('periodoDe');
         this.searchForm.removeControl('periodoAte');
         this.searchForm.removeControl('pagador');
-        this.searchForm.addControl(
-          'numero_nota_ato',
-          new FormControl(this.pesquisa.numero_nota_ato, Validators.required)
-        );
+        this.searchForm.addControl('numero_nota_ato', new FormControl(this.pesquisa.numero_nota_ato, Validators.required));
         break;
 
       case 'pagador':
         this.searchForm.removeControl('periodoDe');
         this.searchForm.removeControl('periodoAte');
         this.searchForm.removeControl('numero_nota_ato');
-        this.searchForm.addControl(
-          'pagador',
-          new FormControl(this.pesquisa.pagador, [Validators.required, isValidCpf])
-        );
-
+        this.searchForm.addControl('pagador', new FormControl(this.pesquisa.pagador, [Validators.required, isValidCpf]));
         break;
     }
   }

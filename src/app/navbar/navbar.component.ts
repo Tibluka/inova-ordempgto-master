@@ -26,10 +26,10 @@ export class NavbarComponent implements OnInit {
       document.getElementById("spanContent").style.display = "none"
       this.infoService.menuIsOpen = false
     } else {
-      document.getElementById("sideNav").style.width = "200px"
+      document.getElementById("sideNav").style.width = "250px"
       setTimeout(() => {
         document.getElementById("spanContent").style.display = "flex"
-      }, 200);
+      }, 100);
       this.infoService.menuIsOpen = true
     }
   }

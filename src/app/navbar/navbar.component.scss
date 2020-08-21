@@ -20,13 +20,14 @@ nav {
   width: 100%;
   padding: 8px 20px;
   margin: auto;
-  max-height: 6vh;
+  max-height: 7vh;
   justify-content: space-between;
   align-items: center;
   display: flex;
   flex: 0;
-  background-color: rgb(253, 159, 122);
-  h2{
+  background-color: var(--navbar-color);
+  a{
+    margin-top: 2px;
     font-size: 11pt;
   }
 

@@ -66,6 +66,7 @@ $inova-pagamentos-theme: mat-light-theme(
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 @include angular-material-theme($inova-pagamentos-theme);
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;1,100;1,200;1,300;1,400;1,500;1,600&display=swap');
 
 /* You can add global styles to this file, and also import other style files */
 
@@ -80,13 +81,23 @@ body {
 }
 
 html {
-  font-size: 62.5%;
+  font-size: 50%;
+  
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+}
+
+:root{
+  --button-color: rgb(255, 163, 71);
+  --navbar-color: rgb(255, 163, 71);
+  --sidemenu-color: rgb(252, 243, 227);
+  --sidemenuHover-color: rgb(255, 232, 194);
+  --disabledButton-color: rgb(253, 201, 181);
 }
 
 h1,
@@ -136,6 +147,12 @@ section {
   width: 100%;
   // margin: auto;
   display: flex;
+}
+
+.btn{
+  height: 50px !important;
+  width: 205px !important;
+  background: var(--button-color) !important;
 }
 
 a {
